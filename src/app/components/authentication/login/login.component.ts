@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { InputComponent } from '../../../shared/input/input.component';
 import { CommonModule } from '@angular/common';
 import {
@@ -11,6 +11,10 @@ import { LoginModel } from '../../../models/auth-models/loginModel';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Router, RouterLink } from '@angular/router';
 import { ApiErrorsComponent } from '../../../shared/api-errors/api-errors.component';
+import { LoadingButtonComponent } from '../../../shared/loading-button/loading-button.component';
+import { ErrorService } from '../../../services/error.service';
+import { LoadingService } from '../../../services/loading.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,19 +25,21 @@ import { ApiErrorsComponent } from '../../../shared/api-errors/api-errors.compon
     ReactiveFormsModule,
     RouterLink,
     ApiErrorsComponent,
+    LoadingButtonComponent,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup = new FormGroup({});
   model: LoginModel = { username: '', password: '' };
-  loading = false;
 
   constructor(
     public authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
     private router: Router,
+    public loadingService: LoadingService,
+    private errorService: ErrorService,
   ) {}
 
   ngOnInit(): void {
@@ -55,5 +61,10 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl(this.authenticationService.previousPage);
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    this.loadingService.loading.set(false);
+    this.errorService.errors.set({});
   }
 }

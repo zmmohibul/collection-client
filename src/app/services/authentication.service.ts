@@ -1,10 +1,10 @@
-import { Injectable, signal } from '@angular/core';
+import { Inject, Injectable, signal } from '@angular/core';
 import { User } from '../models/auth-models/user';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { LoginModel } from '../models/auth-models/loginModel';
-import { tap } from 'rxjs';
+import { delay, tap } from 'rxjs';
 import { RegisterModel } from '../models/auth-models/registerModel';
 
 @Injectable({

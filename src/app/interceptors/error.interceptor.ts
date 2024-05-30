@@ -6,21 +6,23 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { catchError, Observable } from 'rxjs';
+import { catchError, delay, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ErrorService } from '../services/error.service';
+import { LoadingService } from '../services/loading.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
     private errorService: ErrorService,
+    private loadingService: LoadingService,
   ) {}
 
   intercept(
-    request: HttpRequest<unknown>,
+    request: HttpRequest<any>,
     next: HttpHandler,
-  ): Observable<HttpEvent<unknown>> {
+  ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error) {

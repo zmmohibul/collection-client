@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { InputComponent } from '../../../shared/input/input.component';
 import {
   AbstractControl,
@@ -14,6 +14,8 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ErrorService } from '../../../services/error.service';
 import { ApiErrorsComponent } from '../../../shared/api-errors/api-errors.component';
+import { LoadingButtonComponent } from '../../../shared/loading-button/loading-button.component';
+import { LoadingService } from '../../../services/loading.service';
 
 @Component({
   selector: 'app-register',
@@ -27,24 +29,30 @@ import { ApiErrorsComponent } from '../../../shared/api-errors/api-errors.compon
     NgIf,
     TitleCasePipe,
     ApiErrorsComponent,
+    LoadingButtonComponent,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   registerForm: FormGroup = new FormGroup({});
   model: RegisterModel = {
     username: '',
     password: '',
   };
-  loading = false;
 
   constructor(
     public authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
     private router: Router,
+    public loadingService: LoadingService,
     private errorService: ErrorService,
   ) {}
+
+  ngOnDestroy(): void {
+    this.loadingService.loading.set(false);
+    this.errorService.errors.set({});
+  }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({

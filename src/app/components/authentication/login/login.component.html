@@ -13,17 +13,19 @@
 
         <app-api-errors></app-api-errors>
 
-        <button class="btn btn-secondary btn-block my-3">
-          Submit
+        <button class="btn btn-secondary btn-block my-3" *ngIf="!loadingService.loading()">
+          Log in
         </button>
+
+        <app-loading-button *ngIf="loadingService.loading()" label="Logging in..."></app-loading-button>
       </form>
-      <!--      <div *ngIf="loading" class="loader"></div>-->
 
       <h5 class="fw-normal my-3">Don't have an account?</h5>
       <button
         type="button"
         class="btn btn-outline-secondary"
         routerLink="/register"
+        [disabled]="loadingService.loading()"
       >
         Register
       </button>

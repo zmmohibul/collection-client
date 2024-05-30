@@ -22,9 +22,11 @@
         </div>
 
         <app-api-errors></app-api-errors>
-
-        <button  class="btn btn-secondary btn-block my-4 ">
-          Submit
+        <div class="my-4" *ngIf="loadingService.loading()">
+          <app-loading-button  label="Registering..."></app-loading-button>
+        </div>
+        <button  class="btn btn-secondary btn-block my-4" *ngIf="!loadingService.loading()">
+          Register
         </button>
       </form>
       <!--      <div *ngIf="loading" class="loader"></div>-->
@@ -35,6 +37,7 @@
         type="button"
         class="btn btn-outline-secondary"
         routerLink="/login"
+        [disabled]="loadingService.loading()"
       >
         Login
       </button>
