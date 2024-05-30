@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center align-items-center" style="height: 85vh">
+
+
+
+  <div class="text-center">
+    <h1 class="h1 fw-normal mb-3">Register</h1>
+    <div class="py-3 px-3" style="width: 25rem">
+      <form (submit)="submitForm($event)">
+        <div class="mb-3">
+          <app-input [formControl]="$any(registerForm.controls['username'])" inputType="text"
+                     label="Username"></app-input>
+        </div>
+
+        <div class="mb-3" [ngClass]="{ 'mb-l': registerForm.controls['password'].errors?.['pattern'] }">
+          <app-input [formControl]="$any(registerForm.controls['password'])" inputType="password"
+                     label="Password" name="password"></app-input>
+        </div>
+
+        <div class="mb-1">
+          <app-input [formControl]="$any(registerForm.controls['confirmPassword'])" inputType="password"
+                     label="Confirm Password"></app-input>
+        </div>
+
+        <app-api-errors></app-api-errors>
+
+        <button  class="btn btn-secondary btn-block my-4 ">
+          Submit
+        </button>
+      </form>
+      <!--      <div *ngIf="loading" class="loader"></div>-->
+
+
+      <h5 class="fw-normal">Already have an account?</h5>
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        routerLink="/login"
+      >
+        Login
+      </button>
+    </div>
+  </div>
+</div>

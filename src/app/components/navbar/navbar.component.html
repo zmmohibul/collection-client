@@ -1,0 +1,31 @@
+<div class="main-div" >
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <div class="d-flex">
+        <a class="navbar-brand" routerLink="">Collection</a>
+        <a class="navbar-brand search-icon"><i class="bi bi-search"></i></a>
+        <div class="search-bar">
+          <form class="d-flex" role="search">
+            <input class="form-control rounded-pill me-2" type="search" placeholder="Search" aria-label="Search">
+          </form>
+        </div>
+      </div>
+
+      <div class="position-relative" *ngIf="authService.user()">
+        <a class="bi bi-person-circle navbar-brand px-2 hover" (click)="userIconClick()"></a>
+        <div class="card user-dropdown translate-middle" [ngClass]="{'d-none': !showUserDropdown()}" style="width: 15rem;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item rounded"><i class="bi bi-person-circle me-2"></i> {{ authService.user()?.username }}</li>
+            <li class="list-group-item rounded"><i class="bi bi-gear-fill me-2"></i> Settings</li>
+            <li class="list-group-item rounded" (click)="authService.logout()"><i class="bi  bi-arrow-right-circle-fill fill  me-2"></i> Logout</li>
+          </ul>
+        </div>
+      </div>
+
+      <div *ngIf="!authService.user()">
+        <button type="button" class="btn btn-outline-secondary mx-2" routerLink="login">Login</button>
+      </div>
+    </div>
+  </nav>
+
+</div>

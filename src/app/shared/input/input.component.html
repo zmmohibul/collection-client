@@ -1,0 +1,16 @@
+<div class="">
+  <label for={{label}} class="form-label">{{label}}</label>
+  <input
+    [formControl]="control"
+    class="form-control"
+    id={{label}}
+    type={{inputType}}>
+
+  <div *ngIf="requiredError" class="text-danger">
+    {{label}} is required!
+  </div>
+
+  <div *ngIf="passwordMismatchError" class="text-danger">
+    Passwords do not match!
+  </div>
+</div>

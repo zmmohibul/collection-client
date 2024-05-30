@@ -1,0 +1,7 @@
+<div class="error" *ngIf="errors()">
+  <div *ngFor="let key of Object.keys(errors())" class="text-danger mt-3">
+    <div *ngFor="let message of errors()[key]">
+      {{ key | titlecase }} {{ message }}!
+    </div>
+  </div>
+</div>

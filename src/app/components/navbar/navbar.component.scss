@@ -1,0 +1,34 @@
+.user-dropdown {
+  position: absolute;
+  top: 109px;
+  left: -90px;
+}
+
+.navbar {
+  //background-color: #fff !important;
+}
+
+.user-dropdown li:hover {
+  cursor: pointer;
+  opacity: .6;
+  background-color: #ececec;
+}
+
+.hover:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.search-icon {
+  display: none;
+}
+
+@media (width <= 400px) {
+  .search-bar {
+    display: none;
+  }
+
+  .search-icon {
+    display: block;
+  }
+}

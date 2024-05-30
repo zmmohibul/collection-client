@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center align-items-center" style="height: 85vh">
+  <div>
+    <h2 class="h1 text-center fw-normal mb-3">Login</h2>
+    <div class="text-center py-4 px-3" style="width: 25rem;">
+      <form class="" (submit)="login($event)">
+        <div class="mb-3">
+          <app-input [formControl]="$any(loginForm.controls['username'])" inputType="text"
+                     label="Username"></app-input>
+        </div>
+
+        <app-input [formControl]="$any(loginForm.controls['password'])" inputType="password"
+                   label="Password"></app-input>
+
+        <app-api-errors></app-api-errors>
+
+        <button class="btn btn-secondary btn-block my-3">
+          Submit
+        </button>
+      </form>
+      <!--      <div *ngIf="loading" class="loader"></div>-->
+
+      <h5 class="fw-normal my-3">Don't have an account?</h5>
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        routerLink="/register"
+      >
+        Register
+      </button>
+    </div>
+  </div>
+</div>
