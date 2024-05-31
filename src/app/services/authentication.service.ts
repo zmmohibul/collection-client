@@ -11,7 +11,7 @@ import { RegisterModel } from '../models/auth-models/registerModel';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  baseUrl = environment.apiUrl;
+  baseUrl = `https://collection-a6x5.onrender.com/api`;
   user = signal<User | null>(null);
   previousPage = '';
   constructor(
