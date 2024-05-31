@@ -13,11 +13,13 @@
 
         <app-api-errors></app-api-errors>
 
-        <button class="btn btn-secondary btn-block my-3" *ngIf="!loadingService.loading()">
+        <button class="btn btn-secondary btn-block mt-4" *ngIf="!loadingService.loading()">
           Log in
         </button>
 
-        <app-loading-button *ngIf="loadingService.loading()" label="Logging in..."></app-loading-button>
+        <div class="my-4" *ngIf="loadingService.loading()">
+          <app-loading-button  label="Logging in..."></app-loading-button>
+        </div>
       </form>
 
       <h5 class="fw-normal my-3">Don't have an account?</h5>
